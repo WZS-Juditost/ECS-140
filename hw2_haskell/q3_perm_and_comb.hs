@@ -10,21 +10,13 @@ combinations n k = permutations n k `div` factorial k
 
 main :: IO ()
 main = do
+
+  putStrLn "Enter an integer for n: "
+  n <- readLn :: IO Integer
+  putStrLn "Enter an integer for k: "
+  k <- readLn :: IO Integer
+  let c = combinations n k
+  let p = permutations n k
   
-  let n = 5
-  let k = 3
-  putStrLn $ "The permutations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show (permutations n k)
-  putStrLn $ "The combinations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show (combinations n k)
-  putStrLn ""
-
-  let n = 8
-  let k = 4
-  putStrLn $ "The permutations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show (permutations n k)
-  putStrLn $ "The combinations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show (combinations n k)
-  putStrLn ""
-
-  let n = 7
-  let k = 2
-  putStrLn $ "The permutations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show (permutations n k)
-  putStrLn $ "The combinations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show (combinations n k)
-  putStrLn ""
+  putStrLn $ "The permutations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show p
+  putStrLn $ "The combinations of " ++ show n ++ " and " ++ show k ++ " is: " ++ show c

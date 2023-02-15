@@ -1,15 +1,21 @@
-a :: Integer
-a = 2
+a :: IO Integer
+a = do
+    putStrLn "Enter an integer for a: "
+    input <- getLine
+    return (read input :: Integer)
 
-b :: Integer
-b = 3
+b :: IO Integer
+b = do
+    putStrLn "Enter an integer for b: "
+    input <- getLine
+    return (read input :: Integer)
 
 square :: Integer -> Integer
 square x = x * x
 
-result :: Integer
-result = square (a + b)
-
 main :: IO ()
 main = do
-    putStrLn $ "The result of square (" ++ show a  ++ " + " ++ show b ++ ") is " ++ show result
+    intA <- a
+    intB <- b
+    let result = square (intA + intB)
+    putStrLn $ "The result of square( " ++ show intA ++ " + " ++ show intB ++ " ) is: " ++ show result

@@ -1,10 +1,14 @@
-import Control.Monad.Cont
+import Data.List
 
-starRow :: Int -> String
-starRow n = replicate ((5 - n) `div` 2) ' ' ++ replicate (2 * n - 1) '*' ++ replicate ((5 - n) `div` 2) ' '
+printStar :: Int -> [Char]
+printStar n = replicate n '*'
 
-starPattern :: [String]
-starPattern = runCont (Cont $ \k -> forM [1,3..5] $ \n -> k (starRow n)) id
+addSpace :: Int -> [Char]
+addSpace n = replicate (2 - (n - 1) `div` 2) ' ' ++ printStar n ++ replicate (2 - (n - 1) `div` 2) ' '
+
+printPattern :: String
+printPattern = unlines $ map addSpace [1, 3 .. 5] ++ map addSpace [3, 1]
 
 main :: IO ()
-main = mapM_ putStrLn (starPattern ++ reverse (init starPattern))
+main = putStrLn printPattern
+

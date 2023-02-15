@@ -2,39 +2,52 @@
 #include <stdlib.h>
 #include <string.h>
 
-void starRow(int n, char *result) {
+void printStar(int n, char *result) {
   int i;
-  int spaces = abs(n - 2);
-  int stars = 2 * (n % 3) + 1;
-  for (i = 0; i < spaces; i++) {
-    result[i] = ' ';
-  }
-  for (; i < spaces + stars; i++) {
+  for (i = 0; i < n; i++) {
     result[i] = '*';
   }
   result[i] = '\0';
 }
 
-void starPattern(int n, char **result) {
-  if (n == 5) {
-    return;
+void addSpace(int n, char *result) {
+  int i;
+  int spaces = 2 - (n - 1) / 2;
+  for (i = 0; i < spaces; i++) {
+    result[i] = ' ';
   }
-  char row[1024];
-  starRow(n, row);
-  result[n] = strdup(row);
-  starPattern(n + 1, result);
+  char stars[1024];
+  printStar(n, stars);
+  strcpy(result + i, stars);
+  i += n;
+  for (; i < spaces + n + spaces; i++) {
+    result[i] = ' ';
+  }
+  result[i] = '\0';
+}
+
+void printPattern(char *result) {
+  int i = 0;
+  char temp[1024];
+  for (int n = 1; n <= 5; n += 2) {
+    addSpace(n, temp);
+    strcpy(result + i, temp);
+    i += strlen(temp);
+    result[i++] = '\n';
+  }
+  for (int n = 3; n >= 1; n -= 2) {
+    addSpace(n, temp);
+    strcpy(result + i, temp);
+    i += strlen(temp);
+    result[i++] = '\n';
+  }
+  result[i - 1] = '\0';
 }
 
 int main(int argc, char **argv) {
-  char *result[1024];
+  char result[1024 * 1024];
   memset(result, 0, sizeof(result));
-  starPattern(0, result);
-  for (int i = 0; i < 1024; i++) {
-    if (result[i] == NULL) {
-      break;
-    }
-    printf("%s\n", result[i]);
-    free(result[i]);
-  }
+  printPattern(result);
+  printf("%s", result);
   return 0;
 }
