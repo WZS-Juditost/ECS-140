@@ -1,3 +1,4 @@
+-- Quicksort: read in a list of integers separated by spaces and sort them into an ordered list
 quickSort :: [Int] -> [Int]
 quickSort [] = []
 quickSort (first:rest) = (quickSort [x | x <- rest, x < first]) ++ [first] ++ quickSort [x | x <- rest, x == first] ++ quickSort [x | x <- rest, x > first]

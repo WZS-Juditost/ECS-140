@@ -1,10 +1,13 @@
+-- factorial computation
 factorial :: Integer -> Integer
 factorial 0 = 1
 factorial n = n * factorial (n - 1)
 
+-- permutation
 permutations :: Integer -> Integer -> Integer
 permutations n k = factorial n `div` factorial (n - k)
 
+-- combination
 combinations :: Integer -> Integer -> Integer
 combinations n k = permutations n k `div` factorial k
 
